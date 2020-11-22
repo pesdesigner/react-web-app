@@ -1,17 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+let tituloLista = 'Cursos Recentes'
+
+const dadosCurso = [
+  {nome: 'React', categoria: 'Desenvolvimento'},
+  {nome: 'Javascript', categoria: 'Desenvolvimento Web'},
+  {nome: 'TypeScript', categoria: 'Desenvolvimento'},
+]
+
+function listaCursos() {
+  let saida = []
+  dadosCurso.forEach(item => {
+  saida.push(<li>{item.nome} - {item.categoria}</li>)
+  })
+  return saida
+}
+
+const markup = 
+    <section>
+        <h1>{tituloLista}</h1>
+        <ul>
+          {listaCursos()}
+        </ul>
+    </section>
+
+const teste = React.createElement(
+  'h2', {className: 'teste'}, 'H2 criado com createElement'
+)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    markup,
+    document.getElementById('root')
+)

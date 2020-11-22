@@ -14,6 +14,8 @@ body {
   padding: 0.5em;
 }
 
+.teste { color: red } /*teste*/
+
 .btn {
   background: rgb(232, 181, 41);
   color: white;
