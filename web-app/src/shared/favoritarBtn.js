@@ -1,3 +1,16 @@
+import React from 'react';
+
 export default function FavoritarBtn(props){
-    return <button className="btn btn--like">{props.label || 'Adicionar'}</button>
+
+    let contador = 0
+
+    let callContador = () => {
+        contador++
+        console.log(contador)
+    }
+
+    return <button className="btn btn--like" onClick={callContador}>
+            {props.label || 'Adicionar'} : {contador}
+           </button>
 }
+
