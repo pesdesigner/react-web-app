@@ -17,10 +17,10 @@ body {
 .teste { color: red } /*teste*/
 
 .btn {
-  background: rgb(232, 181, 41);
+  background:#42B0CC;
   color: white;
   padding: 0.5em;
-  border: 2px solid rgb(232, 181, 41);
+  border: 2px solid #42B0CC;
   border-radius: 5px;
   display: inline-block;
 }
@@ -46,11 +46,11 @@ body {
 
 .btn--like:hover {
   background: white;
-  color:  rgb(232, 181, 41);
+  color:  #42B0CC;
 }
 
 .btn--like:focus {
-  outline: 2px solid #DF2E2D;
+  outline: 2px solid#42B0CC;;
 }
 
 /* header */

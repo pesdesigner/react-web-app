@@ -4,9 +4,12 @@ export default class FavoritarBtnComEstado extends React.Component {
     constructor(props) {
         super(props)
         this.state = {contador: 0}
+        this.callContador = this.callContador.bind(this)
     }
 
-    callContador = () => {
+    callContador (e) {
+        console.log(e.currentTarget)
+        e.stopPropagation()
         this.setState((estadoAnterior) => ({contador: ++estadoAnterior.contador}))
     }
 
