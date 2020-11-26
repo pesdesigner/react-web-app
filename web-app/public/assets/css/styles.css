@@ -31,6 +31,12 @@ body {
   font-size: 16px;
 }
 
+.btn--inscrever {
+  background-color: #DF2E2D;
+  border-color: #DF2E2D;
+  margin-left: 1em;
+}
+
 .btn--like::before {
   content: '';
   background-image: url('/assets/img/heart.svg');

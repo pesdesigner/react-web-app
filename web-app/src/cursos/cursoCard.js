@@ -1,36 +1,50 @@
-import estiloModulo from './cursoCard.module.css'
+import estiloModulo from './CursoCard.module.css'
 import React from 'react';
-import FavoritarBtnComEstado from '../shared/favoritarBtnComEstado';
 import propTypes from 'prop-types';
-import { BotaoInline } from '../shared/BotaoInline';
-import { BotaoInlineComEstado } from '../shared/BotaoInlineComEstado';
+import CardBtn from '../shared/CardBtn';
+import { InfoCard } from './InfoCard'
 
 export class CursoCard extends React.Component {
-    render() {
-
-        let listaRequisitos = this.props.requisitos.map((requisito, index) =>
-            <li className={estiloModulo.card__tags__item} key={index}>{requisito}</li>
-        )
-
-        const clickCard = e => {
-            console.log(e.currentTarget)
+    constructor(props){
+        super(props)
+        this.state = {
+            favoritos: this.props.favoritos,
+            vagas: this.props.vagas,
+            toggleForm: false
         }
+    }
 
-        return <article className={estiloModulo.card} onClick={clickCard}>
+    clickFavoritar = () => {
+        this.setState((estadoAnterior) => ({
+            favoritos: ++estadoAnterior.favoritos
+        }))
+    }
+
+    clickInscricao = (event) => {
+        this.setState((estadoAnterior) => ({
+            toggleForm: !estadoAnterior.toggleForm
+        }))
+    }
+
+    render() {
+        return <article className={estiloModulo.card}>
         <div className={estiloModulo.card__img}>
             <img className={estiloModulo.card__img} src={this.props.thumb} alt={this.props.alt}/>
             <div className={estiloModulo.card__block}>
                 <time className={estiloModulo.card__date}>{this.props.dataCurso}</time>
-                <h4 className={estiloModulo.card__title}>{this.props.nome}</h4>
-                <p className={estiloModulo.card__text}>{this.props.categoria}</p>
-                <h5 className={estiloModulo.card_subtitle}>Requisitos:</h5>
-                <ul className={estiloModulo.card_tags}>{listaRequisitos}</ul>              
+                {this.state.toggleForm ? 
+                    <p>Formulário de inscrição</p> :
+                    <InfoCard vagas={this.state.vagas}
+                        requisitos={this.props.requisitos}
+                        nome={this.props.nome}
+                        categoria={this.props.categoria} />    
+                    }
             </div>
             <div>
                 <footer className={estiloModulo.card__footer}>
-                    <FavoritarBtnComEstado label="Gostei" />
-                    <BotaoInline />
-                    <BotaoInlineComEstado />
+                    <CardBtn contador={this.state.favoritos} label="Gostei" action={this.clickFavoritar} />
+                    <CardBtn label="Inscrever-se" tipoBtn="inscrever"
+                    action={this.clickInscricao} />
                 </footer>
             </div>
         </div>
@@ -39,7 +53,10 @@ export class CursoCard extends React.Component {
 }
 // exemplo de class props default
 CursoCard.defaultProps = {
-    nome: 'Treinamento'
+    nome: 'Treinamento',
+    requisitos: [],
+    vagas: 10,
+    favoritos: 0
 }
 
 CursoCard.propTypes = {
