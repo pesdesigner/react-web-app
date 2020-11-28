@@ -1,0 +1,49 @@
+.form {
+  background: #f3f3f3;
+  padding: 0.5em 1em 4em;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 1.2em;
+}
+
+.select {
+  display: block;
+  margin: 0.5em 0;
+  width: 50%;
+  font-size: 18px;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  font-size: 1.1em;
+  box-sizing: border-box;
+}
+
+.select:focus,
+.input:focus {
+  outline: 2px solid #F9C948;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.btn {
+  float: right;
+}
+
+.radiobox {
+  display: block;
+  margin-top: 0.2em;
+}
+
+.check {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  display: block;
+  font-weight: bold;
+}

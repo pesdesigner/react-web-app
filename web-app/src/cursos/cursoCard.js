@@ -3,6 +3,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import CardBtn from '../shared/CardBtn';
 import { InfoCard } from './InfoCard'
+import { FormInscricao } from './FormInscricao';
 
 export class CursoCard extends React.Component {
     constructor(props){
@@ -10,7 +11,8 @@ export class CursoCard extends React.Component {
         this.state = {
             favoritos: this.props.favoritos,
             vagas: this.props.vagas,
-            toggleForm: false
+            toggleForm: false,
+            inscricoes: []
         }
     }
 
@@ -20,10 +22,31 @@ export class CursoCard extends React.Component {
         }))
     }
 
-    clickInscricao = (event) => {
+    clickInscricao = () => {
         this.setState((estadoAnterior) => ({
             toggleForm: !estadoAnterior.toggleForm
         }))
+    }
+
+    enviarFormulario = (evento, estadoForm) => {
+        console.log(evento, estadoForm)
+        evento.preventDefault()
+        this.setState((estadoAnterior) => ({
+            toggleForm: !estadoAnterior.toggleForm,
+            vagas: --estadoAnterior.vagas,
+            inscricoes: [...estadoAnterior.inscricoes, estadoForm]
+        }))
+    }
+
+    showContent = () => {
+        if(this.state.toggleForm){
+            return <FormInscricao enviar={this.enviarFormulario}/>
+            } else {
+            return <InfoCard vagas={this.state.vagas}
+                    requisitos={this.props.requisitos}
+                    nome={this.props.nome}
+                    categoria={this.props.categoria} />    
+            }
     }
 
     render() {
@@ -32,13 +55,10 @@ export class CursoCard extends React.Component {
             <img className={estiloModulo.card__img} src={this.props.thumb} alt={this.props.alt}/>
             <div className={estiloModulo.card__block}>
                 <time className={estiloModulo.card__date}>{this.props.dataCurso}</time>
-                {this.state.toggleForm ? 
-                    <p>Formulário de inscrição</p> :
-                    <InfoCard vagas={this.state.vagas}
-                        requisitos={this.props.requisitos}
-                        nome={this.props.nome}
-                        categoria={this.props.categoria} />    
-                    }
+                {this.showContent()}
+                <ul>
+            {this.state.inscricoes.map(item => <li>{item.nome}</li>)}
+                </ul>
             </div>
             <div>
                 <footer className={estiloModulo.card__footer}>
