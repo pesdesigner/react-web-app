@@ -12,7 +12,7 @@ export class FormInscricao extends React.Component {
       periodo: 'M',
       genero: 'Masculino',
       observacao: '',
-      addObservacao: false
+      addObservacao: false,
     }
   }
 updateEstado = (evento) => {
@@ -20,11 +20,32 @@ updateEstado = (evento) => {
   this.setState({[evento.target.name]: value})
 }
 
+componentDidMount(){
+  console.log('montou')
+  if(this.props.promoTimer > 0){
+    this.timerPromo = setInterval(() => this.props.decrementTimer(), 1000);
+  }
+}
+
+componentWillUnmount(){
+  clearInterval(this.timerPromo)
+}
+
+getFormattedTime(){
+  let minutos = Math.floor(this.props.promoTimer/ 60);
+  minutos = (minutos < 10 && '0') + minutos;
+  let segundos = Math.floor(this.props.promoTimer%60);
+  segundos = (segundos < 10 && '0') + segundos;
+  return `${minutos}:${segundos}`;
+}
+
   render() {
       return <form className={style.form} onSubmit={(evento) => this.props.enviar(evento, this.state)}>
 
       <h3 className={style.title}>Formulario de inscrição</h3>
-
+      {this.props.promoTimer > 0 && 
+      <p className={style.promo}>Não perca nossa promoção de <strong>20%</strong>: {this.getFormattedTime()}
+        </p>}
   <label className={style.label}>Nome: {this.state.nome}</label>
       <input type="text" name="nome" value={this.state.nome} onChange={this.updateEstado} className={style.input} />
       

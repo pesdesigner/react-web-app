@@ -12,8 +12,10 @@ export class CursoCard extends React.Component {
             favoritos: this.props.favoritos,
             vagas: this.props.vagas,
             toggleForm: false,
-            inscricoes: []
+            inscricoes: [],
+            promoTimer: this.props.promoTimer
         }
+        this.decrementarTimer = this.decrementarTimer.bind(this)
     }
 
     clickFavoritar = () => {
@@ -38,9 +40,23 @@ export class CursoCard extends React.Component {
         }))
     }
 
+    decrementarTimer(){
+        console.log(this,'chamou timer')
+        if(this.state.promoTimer > 0){
+          this.setState((estadoAnterior)=>(
+            {
+             promoTimer: --estadoAnterior.promoTimer 
+            }
+          ))
+        }
+    }
+
     showContent = () => {
         if(this.state.toggleForm){
-            return <FormInscricao enviar={this.enviarFormulario}/>
+            return <FormInscricao enviar={this.enviarFormulario}
+                                  promoTimer={this.state.promoTimer}
+                                  decrementTimer={this.decrementarTimer}
+                                  />
             } else {
             return <InfoCard vagas={this.state.vagas}
                     requisitos={this.props.requisitos}

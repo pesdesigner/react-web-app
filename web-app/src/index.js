@@ -15,6 +15,7 @@ ReactDOM.render(
        categoria="20h de curso - Desenvolvimento"
        vagas="30"
        favoritos="10"
+       promoTimer="300"
        />
       <CursoCard
        thumb="./assets/img/typescript.jpg"
