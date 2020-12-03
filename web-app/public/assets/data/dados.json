@@ -1,7 +1,7 @@
 {
   "cursos": [
     {
-      "thumb": "assets/img/javascript.jpg", 
+      "thumb": "/assets/img/javascript.jpg", 
       "dataCurso": "30 Nov", 
       "nome":"JavaScript", 
       "categoria" : "desenvolvimento",
@@ -10,7 +10,7 @@
       "promoTimer": 300
     },
     {
-      "thumb": "assets/img/typescript.jpg", 
+      "thumb": "/assets/img/typescript.jpg", 
       "dataCurso": "30 Nov", 
       "nome": "TypeScript", 
       "categoria" : "desenvolvimento",
@@ -18,7 +18,7 @@
       "vagas": 15
     },
     {
-      "thumb": "assets/img/photoshop.jpg", 
+      "thumb": "/assets/img/photoshop.jpg", 
       "dataCurso": "30 Nov", 
       "nome": "Photoshop", 
       "categoria" : "design",

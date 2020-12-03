@@ -1,9 +1,10 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CursoContainer from './cursos/CursoContainer';
+
+import AppRouter from './router/AppRouter';
 
 ReactDOM.render(
-    <CursoContainer />,
+    <AppRouter />,
     document.getElementById('root')
 )

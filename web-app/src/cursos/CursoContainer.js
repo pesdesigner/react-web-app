@@ -1,7 +1,10 @@
-import React from 'react';
-import { CursoCard } from './CursoCard';
 import style from './CursoContainer.module.css';
+
 import axios from 'axios';
+import React from 'react';
+
+import { CursoCard } from './CursoCard';
+// import { FiltroCards } from './FiltroCards';
 
 export default class CursoContainer extends React.Component {
     constructor(props){
@@ -9,17 +12,26 @@ export default class CursoContainer extends React.Component {
         this.state = {
             carregou: false,
             cursos: [],
-            error: null
+            cursosBackup: [],
+            error: null,
+            filtroAtual: this.props.filtro,
         }
+        this.filtrarCards = this.filtrarCards.bind(this)
+        this.limparFiltro = this.limparFiltro.bind(this)
     }
 
     componentDidMount(){
+        this.axiosCall();
+    }
+
+    axiosCall(){
         axios.get('http://localhost:3000/assets/data/dados.json')
         .then(
             result => {
                 this.setState({
                     carregou: true,
-                    cursos: result.data.cursos
+                    cursos: result.data.cursos,
+                    cursosBackup: result.data.cursos
                 })
             },
             error => {
@@ -29,25 +41,26 @@ export default class CursoContainer extends React.Component {
                 })
             }
         )
+    } 
+
+    busca(dados, categoria){
+        const consulta = (categoria) ?
+        dados.filter(item => (item.categoria === categoria)):dados;
+        return consulta
     }
 
-    fetchApiCall(){
-        fetch('http://localhost:3000/assets/data/dados.json')
-        .then(res => res.json())
-        .then(
-            result => {
-                this.setState({
-                    carregou: true,
-                    cursos: result.cursos
-                })
-            },
-            (error) => {
-                this.setState({
-                    carregou: true,
-                    error
-                })
-            }
-        )
+    filtrarCards(categoria){
+        this.setState({
+            cursos: this.busca(this.state.cursosBackup, categoria),
+            filtroAtual: categoria
+        })
+    }
+
+    limparFiltro(){
+        this.setState({
+            cursos: this.state.cursosBackup,
+            filtroAtual: null
+        })
     }
 
     render (){
@@ -58,8 +71,12 @@ export default class CursoContainer extends React.Component {
         }
 
         if(carregou){
-            return <div className="listaCurso">
-                {cursos.map((curso, index) => (
+            return <section>
+                <nav className={style.filtro}>
+                    {this.props.filtro && <div>Filtrado por: {this.props.filtro}</div>}
+                </nav>
+                <div className={style.listaCurso}>
+                {this.busca(cursos,this.props.filtro).map((curso, index) => (
                     <CursoCard key={index} thumb={curso.thumb}
                     dataCurso={curso.dataCurso}
                     nome={curso.nome}
@@ -69,6 +86,7 @@ export default class CursoContainer extends React.Component {
                 )
             )} 
             </div>
+            </section>
         } else {
             return <div className={style.lds__ripple}><div></div><div></div></div>
 

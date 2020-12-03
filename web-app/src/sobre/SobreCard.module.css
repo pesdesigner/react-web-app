@@ -1,0 +1,13 @@
+.pageCard {
+  box-shadow: 2px 2px 10px #DDDDDD;
+  margin: 1em auto 3em;
+  width: 750px;
+  background: white;
+  padding: 1em 2em;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.title {
+  margin-top: 0;
+}

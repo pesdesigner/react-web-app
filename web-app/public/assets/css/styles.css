@@ -146,6 +146,15 @@ body {
   text-align: center
 }
 
+.footerbar a {
+  text-decoration: none;
+  color: #42b0cc;
+}
+
+.footerbar a:hover {
+  color: #b9e9f7;
+}
+
 .card .responsive-img {
   height: auto;
   max-width: 100%;
