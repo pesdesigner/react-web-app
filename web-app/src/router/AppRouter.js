@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import style from './Router.module.css';
 
 import CursoContainer from '../cursos/CursoContainer';
 import SobreCard from '../sobre/SobreCard';
@@ -11,13 +12,11 @@ const CursoFiltrados = ({match}) => (<CursoContainer filtro={match.params.catego
 const AppRouter = () => (
     <Router>
         <section>
-            <nav>
+            <nav className={style.menu}>
                 <ul>
                     <li><Link to="/">Cursos</Link>
-                        <ul>
                             <li><Link to="/cursos/desenvolvimento">Desenvolvimento</Link></li>
                             <li><Link to="/cursos/design">Design</Link></li>
-                        </ul>
                     </li>
                     <li><Link to="/sobre/">Sobre</Link></li>
                 </ul>

@@ -1,4 +1,5 @@
 import style from './CursoContainer.module.css';
+import style2 from '../index.module.css';
 
 import axios from 'axios';
 import React from 'react';
@@ -75,7 +76,7 @@ export default class CursoContainer extends React.Component {
                 <nav className={style.filtro}>
                     {this.props.filtro && <div>Filtrado por: {this.props.filtro}</div>}
                 </nav>
-                <div className={style.listaCurso}>
+                <div className={style2.listaCurso}>
                 {this.busca(cursos,this.props.filtro).map((curso, index) => (
                     <CursoCard key={index} thumb={curso.thumb}
                     dataCurso={curso.dataCurso}
